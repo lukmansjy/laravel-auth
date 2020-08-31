@@ -21,6 +21,17 @@
 </head>
 <body>
     <div id="app">
+
+        @if(Auth::check() && !Auth::user()->email_verified_at)
+            <div class="alert alert-danger mb-n1 text-center" role="alert">
+                Anda belum verifikasi email,
+                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-danger">{{ __('verifikasi ulang') }}</button>.
+                </form>
+            </div>
+        @endif
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
